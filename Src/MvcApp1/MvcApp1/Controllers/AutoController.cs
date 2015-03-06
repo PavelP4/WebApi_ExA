@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MvcApp1.Models;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,6 +14,13 @@ namespace MvcApp1.Controllers
         public string GetOK()
         {
             return "Auto OK!";
+
+            
+        }
+
+        public Auto GetAuto()
+        {
+            return new Auto() { Id = 1, Mark = "Opel", Model = "Insignia", Country = 9};
         }
     }
 }
