@@ -42,6 +42,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\lib\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\..\lib\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -127,17 +133,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Common\AutoDecompressionHttpClient.cs" />
     <Compile Include="Common\EncodedContent.cs" />
     <Compile Include="Common\EncodingHandler.cs" />
     <Compile Include="Common\EncodingSchema.cs" />
+    <Compile Include="Common\NamespaceHttpControllerSelector.cs" />
     <Compile Include="Common\TracingHandler.cs" />
     <Compile Include="Common\WebApiTracer.cs" />
-    <Compile Include="Controllers\AutoController.cs" />
+    <Compile Include="Controllers\V1\AutoController.cs" />
+    <Compile Include="Controllers\V2\AutoController.cs" />
     <Compile Include="Exceptions\NegotiationFailedException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MessageHandlers\MessageHandler1.cs" />
     <Compile Include="Models\Auto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -201,6 +209,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\..\..\lib\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\..\lib\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

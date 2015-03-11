@@ -1,10 +1,12 @@
 ﻿using MvcApp1.Common;
+using MvcApp1.MessageHandlers;
 using MvcApp1.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
 using System.Web.Http.Tracing;
 
 namespace MvcApp1
@@ -15,8 +17,10 @@ namespace MvcApp1
         {
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}",
-                defaults: new { action = RouteParameter.Optional }                
+                routeTemplate: "api/V{api_v}/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+                //constraints: null,
+                //handler: new MessageHandler1(config)
             );
 
             //config.EnableSystemDiagnosticsTracing();
@@ -24,6 +28,8 @@ namespace MvcApp1
             //config.MessageHandlers.Add(new TracingHandler());
 
             //config.MessageHandlers.Add(new EncodingHandler());
+
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Default;
 
             //foreach (var formatter in config.Formatters)
             //{
@@ -35,6 +41,9 @@ namespace MvcApp1
             //    SupportedMediaTypes));
             //}
 
+            //config.MessageHandlers.Add(new MessageHandler1());
+
+            config.Services.Replace(typeof(IHttpControllerSelector), new NamespaceHttpControllerSelector(config));
             
         }
     }
