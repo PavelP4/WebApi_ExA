@@ -141,6 +141,8 @@
     <Compile Include="Common\WebApiTracer.cs" />
     <Compile Include="Controllers\V1\AutoController.cs" />
     <Compile Include="Controllers\V2\AutoController.cs" />
+    <Compile Include="Controllers\V2\PushController.cs" />
+    <Compile Include="Controllers\V2\TestController.cs" />
     <Compile Include="Exceptions\NegotiationFailedException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
