@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="MessageHandlers\MessageHandler1.cs" />
     <Compile Include="Models\Auto.cs" />
+    <Compile Include="Models\Quote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

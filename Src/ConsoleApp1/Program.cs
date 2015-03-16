@@ -16,15 +16,35 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            string URI = "http://myhost:5500/api/auto/getauto";
-            //string URI = "http://localhost:55001/api/auto/getauto";
+            string URI = "http://myhost:5500/api/V2/auto/getauto";
+            //string URI = "http://localhost:55001/api/V2/auto/getauto";
 
-            ShowRequestResult(URI);
+            //ShowRequestResult(URI);
+            //ShowRequestResult_WebClient(URI);
 
-            ShowRequestResult_WebClient(URI);
+            RunClient();
+            Console.WriteLine("Press ENTER to Close");
 
             Console.ReadLine();
         }
+
+        static async void RunClient()
+        {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("http://myhost:5500/api/V2/push", HttpCompletionOption.ResponseHeadersRead);
+
+            using (Stream stream = await response.Content.ReadAsStreamAsync())
+            {
+                byte[] buffer = new byte[512];
+                int bytesRead = 0;
+                while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
+                {
+                    string content = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                    Console.WriteLine(content);
+                }
+            }
+        }
+
 
         public static async Task ShowRequestResult(string URI)
         {
